@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/questionInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Введіть питання" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Складність:" />
+
+    <RadioGroup
+        android:id="@+id/difficultyGroup"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/difficulty_easy"
+            android:layout_width="99dp"
+            android:layout_height="48dp"
+            android:text="Легка" />
+
+        <RadioButton
+            android:id="@+id/difficulty_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Середня" />
+
+        <RadioButton
+            android:id="@+id/difficulty_hard"
+            android:layout_width="99dp"
+            android:layout_height="48dp"
+            android:text="Висока" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Тип питання:" />
+
+    <RadioGroup
+        android:id="@+id/typeGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/type_theory"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Теоретичне" />
+
+        <RadioButton
+            android:id="@+id/type_practical"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Практичне" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ОК" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text=""
+        android:textSize="18sp" />
+
+</LinearLayout>
