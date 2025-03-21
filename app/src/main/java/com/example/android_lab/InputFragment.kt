@@ -10,7 +10,13 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.android_lab.AppDatabase
 import com.example.android_lab.R
+import androidx.lifecycle.lifecycleScope
+import com.example.android_lab.Question
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class InputFragment : Fragment() {
 
@@ -35,13 +41,25 @@ class InputFragment : Fragment() {
             val difficulty = getSelectedRadioButtonText(difficultyGroup)
             val questionType = getSelectedRadioButtonText(typeGroup)
 
-            if (question.isEmpty() || difficulty.isEmpty() || questionType.isEmpty()) {
+            if (question.isBlank() || difficulty == "null" || questionType == "null") {
                 // Якщо одне з полів порожнє
                 Toast.makeText(context, "Заповніть всі поля!", Toast.LENGTH_SHORT).show()
             } else {
                 // Формуємо результат
                 val resultText = "Питання: $question\nСкладність: $difficulty\nТип питання: $questionType"
                 (activity as MainActivity).resultFragment.updateResult(resultText)
+
+                // Додаємо в БД
+                val db = AppDatabase.getDatabase(requireContext())
+                val dao = db.questionDao()
+
+                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                    dao.insert(Question(question = question, complexity = difficulty, type = questionType))
+
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "Питання збережено!", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
